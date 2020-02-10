@@ -1,5 +1,6 @@
 module.exports = {
     Query: {
-        movie: (_, id , { dataSources }) => dataSources.movieAPI.getMovieById( id )
+        movies: (_, {page, mediaType}, {dataSources}) => dataSources.movieAPI.getMovies({page, mediaType}),
+        movie: (_, {id}, { dataSources }) => dataSources.movieAPI.getMovieById({id})
     }
 }

@@ -2,6 +2,10 @@ const { gql } = require("apollo-server");
 
 const typeDefs = gql`
   type Query {
+    movies(
+        page: Int,
+        mediaType: String
+    ): [Movie]
     movie(id: ID!): Movie
   }
 
@@ -9,7 +13,9 @@ const typeDefs = gql`
     adult: Boolean
     backdrop_path: String
     budget: Int
+    """
     genre: Genre
+    """
     homepage: String
     id: ID!
     imdb_id: String

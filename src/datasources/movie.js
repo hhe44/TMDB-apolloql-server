@@ -12,10 +12,10 @@ class MovieAPI extends RESTDataSource {
       adult: movie.adult,
       backdrop_path: movie.backdrop_path,
       budget: movie.budget,
-      genre: {
-        id: movie.genres[0].id,
-        name: movie.genres[0].name
-      },
+      // genre: {
+      //   id: movie.genres[0].id,
+      //   name: movie.genres[0].name
+      // },
       homepage: movie.homepage,
       id: movie.id,
       imdb_id: movie.imdb_id,
@@ -36,8 +36,16 @@ class MovieAPI extends RESTDataSource {
     };
   }
 
-  async getMovieById(movieId) {
-    const link = `${baseURL}/movie/${movieId.id}?api_key=${process.env.API_KEY}`;
+  async getMovies(args) {
+    const link = `${baseURL}/${args.mediaType}?api_key=${process.env.API_KEY}&sort_by=popularity.desc&include_adult=false&language=en-US&page=${args.page}`;
+    const res = await axios.get(link);
+    const movieResults = res.data.results;
+    const movieList = movieResults.map(movie => this.movieReducer(movie));
+    return movieList;
+  }
+
+  async getMovieById(args) {
+    const link = `${baseURL}/movie/${args.id}?api_key=${process.env.API_KEY}`;
     const res = await axios.get(link);
     return this.movieReducer(res.data);
   }
