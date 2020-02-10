@@ -1,11 +1,10 @@
-const axios = require("axios");
-
 const { RESTDataSource } = require("apollo-datasource-rest");
+const axios = require("axios");
+const baseURL = "https://api.themoviedb.org/3"
 
 class MovieAPI extends RESTDataSource {
   constructor() {
     super();
-    this.baseURL = "https://api.themoviedb.org/3";
   }
 
   movieReducer(movie) {
@@ -37,8 +36,8 @@ class MovieAPI extends RESTDataSource {
     };
   }
 
-  async getMovie(movieId) {
-    const link = `${this.baseURL}/movie/${movieId.id}?api_key=${process.env.API_KEY}`;
+  async getMovieById(movieId) {
+    const link = `${baseURL}/movie/${movieId.id}?api_key=${process.env.API_KEY}`;
     const res = await axios.get(link);
     return this.movieReducer(res.data);
   }
