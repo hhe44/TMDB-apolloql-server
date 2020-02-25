@@ -1,4 +1,7 @@
-require("dotenv").config();
+// Uncomment line 2 when running normally
+require('dotenv').config({path: '../.env'})
+// Comment line 2 and uncomment line 4 when debugging
+// require('dotenv').config()
 const { ApolloServer } = require("apollo-server");
 const typeDefs = require("./schema");
 const resolvers = require('./resolvers');

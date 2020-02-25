@@ -2,11 +2,16 @@ const { gql } = require("apollo-server");
 
 const typeDefs = gql`
   type Query {
+
     movies(
         page: Int,
-        mediaType: String
+        mediaType: String!
+        sort_by: String,
+        include_adult: Boolean
     ): [Movie]
+
     movie(id: ID!): Movie
+    
   }
 
   type Movie {
