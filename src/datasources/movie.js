@@ -6,21 +6,23 @@ const queryString = require('query-string');
 class MovieAPI extends RESTDataSource {
   constructor() {
     super();
+    this.movieGenreList = this.getMovieGenres();
   }
 
-  movieReducer(movie) {
-    return movie
+  async movieReducer(movie) {
+    // let test = await this.movieGenreList;
+    // console.log(test);
+    return movie;
   }
 
-  async getMovies(args) {
-    const {mediaType, ...allElse} = args;
+  async discoverMovies(args) {
     const link = queryString.stringifyUrl({
-      url: `${baseURL}/${mediaType}?api_key=${process.env.API_KEY}&`,
-      query: allElse
+      url: `${baseURL}/discover/movie?api_key=${process.env.API_KEY}&`,
+      query: args
     });
     const res = await axios.get(link);
     const movieResults = res.data.results;
-    const movieList = movieResults.map(this.movieReducer);
+    const movieList = await Promise.all(movieResults.map(this.movieReducer));
     return movieList;
   }
 
@@ -29,6 +31,13 @@ class MovieAPI extends RESTDataSource {
     const res = await axios.get(link);
     return this.movieReducer(res.data);
   }
+
+  async getMovieGenres() {
+    const link = `${baseURL}/genre/movie/list?api_key=${process.env.API_KEY}`;
+    const res = await axios.get(link);
+    return res.data;
+  }
+
 }
 
 module.exports = MovieAPI;

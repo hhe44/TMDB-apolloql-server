@@ -1,13 +1,18 @@
-// Uncomment line 2 when running normally
+// use line 2 when running normally
 require('dotenv').config({path: '../.env'})
-// Comment line 2 and uncomment line 4 when debugging
+// use line 4 when debugging
 // require('dotenv').config()
 const { ApolloServer } = require("apollo-server");
 const typeDefs = require("./schema");
 const resolvers = require('./resolvers');
 const MovieAPI = require("./datasources/movie");
 
+//two ideas: getGenrelist to initialize, or supply it as an argument
+// const api = new MovieAPI();
+// api.getGenreList();
+
 const dataSources = () => ({
+  // movieAPI: api
   movieAPI: new MovieAPI()
 });
 
