@@ -46,7 +46,7 @@ const typeDefs = gql`
     adult: Boolean
     backdrop_path: String
     budget: Int
-    genre: Genre
+    genres: [Genre]
     homepage: String
     id: ID!
     imdb_id: String

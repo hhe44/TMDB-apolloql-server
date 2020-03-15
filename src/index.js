@@ -6,14 +6,12 @@ const { ApolloServer } = require("apollo-server");
 const typeDefs = require("./schema");
 const resolvers = require('./resolvers');
 const MovieAPI = require("./datasources/movie");
+const myMovieAPI = new MovieAPI();
 
-//two ideas: getGenrelist to initialize, or supply it as an argument
-// const api = new MovieAPI();
-// api.getGenreList();
+myMovieAPI.init();
 
 const dataSources = () => ({
-  // movieAPI: api
-  movieAPI: new MovieAPI()
+  movieAPI: myMovieAPI
 });
 
 const server = new ApolloServer({ typeDefs, resolvers, dataSources });

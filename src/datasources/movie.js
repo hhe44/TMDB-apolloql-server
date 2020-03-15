@@ -1,17 +1,38 @@
 const { RESTDataSource } = require("apollo-datasource-rest");
 const axios = require("axios");
-const baseURL = "https://api.themoviedb.org/3"
-const queryString = require('query-string');
+const baseURL = "https://api.themoviedb.org/3";
+const queryString = require("query-string");
 
 class MovieAPI extends RESTDataSource {
   constructor() {
     super();
-    this.movieGenreList = this.getMovieGenres();
   }
 
-  async movieReducer(movie) {
-    // let test = await this.movieGenreList;
-    // console.log(test);
+  async init() {
+    // get & set movieGenres
+    this.movieGenres = {};
+    const movieGenreArray = (await axios.get(
+      `${baseURL}/genre/movie/list?api_key=${process.env.API_KEY}`
+    )).data.genres;
+    movieGenreArray.forEach((movieGenre) => {
+      this.movieGenres[movieGenre.id] = movieGenre.name;
+    });
+  }
+
+  movieReducer(movie) {
+    if(movie.genres != null){
+      // if movie genres exist, DON'T DO ANYTHING.
+    } else {
+      // otherwise we need to utilize genre ids
+      movie.genres = [];
+      movie.genre_ids.forEach((genreId) => {
+        const genre = {
+          "name" : this.movieGenres[genreId],
+          "id" : genreId
+        }
+        movie.genres.push(genre);
+      });
+    }
     return movie;
   }
 
@@ -22,7 +43,7 @@ class MovieAPI extends RESTDataSource {
     });
     const res = await axios.get(link);
     const movieResults = res.data.results;
-    const movieList = await Promise.all(movieResults.map(this.movieReducer));
+    const movieList = movieResults.map(movie => this.movieReducer(movie));
     return movieList;
   }
 
@@ -37,7 +58,6 @@ class MovieAPI extends RESTDataSource {
     const res = await axios.get(link);
     return res.data;
   }
-
 }
 
 module.exports = MovieAPI;
