@@ -11,13 +11,11 @@ module.exports = {
             discoverMovieParams
         }),
 
-        getSimilarMovies: (_, getSimilarMoviesParams = {
-            id,page
-        }, { dataSources }) => dataSources.movieAPI.getSimilarMovies(getSimilarMoviesParams),
+        similarMovies: (_, {id,page}, { dataSources }) => dataSources.movieAPI.getMovies("similar",{id,page}),
 
-        recommendMovies: (_, recommendMoviesParams = {
-            id,page
-        }, { dataSources }) => dataSources.movieAPI.recommendMovies(recommendMoviesParams),
+        recommendMovies: (_, {id,page}, { dataSources }) => dataSources.movieAPI.getMovies("recommendations",{id,page}),
+
+        nowPlayingMovies: (_, {page}, { dataSources }) => dataSources.movieAPI.getMovies("now_playing",{page}),
 
         movie: (_, {id}, { dataSources }) => dataSources.movieAPI.getMovieById({id}),
 

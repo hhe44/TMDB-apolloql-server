@@ -2,54 +2,48 @@ const { gql } = require("apollo-server");
 
 const typeDefs = gql`
   type Query {
-
     discoverMovies(
-        page: Int
-        certification: String
-        certification_gte: String
-        certification_lte: String
-        certification_country: String
-        include_adult: Boolean
-        include_video: Boolean
-        language: String
-        primary_release_date_gte: String
-        primary_release_date_lte: String
-        primary_release_year: Int
-        region: String
-        release_date_gte: String
-        release_date_lte: String
-        sort_by: String
-        vote_average_gte: Int
-        vote_average_lte: Int
-        vote_count_gte: Int
-        vote_count_lte: Int
-        with_cast: String
-        with_companies: String
-        with_crew: String
-        with_genres: String
-        with_keywords: String
-        with_original_language: String
-        with_people: String
-        with_release_type: Int
-        with_runtime_gte: Int
-        with_runtime_lte: Int
-        without_genres: String
-        without_keywords: String
-        year: Int
+      page: Int
+      certification: String
+      certification_gte: String
+      certification_lte: String
+      certification_country: String
+      include_adult: Boolean
+      include_video: Boolean
+      language: String
+      primary_release_date_gte: String
+      primary_release_date_lte: String
+      primary_release_year: Int
+      region: String
+      release_date_gte: String
+      release_date_lte: String
+      sort_by: String
+      vote_average_gte: Int
+      vote_average_lte: Int
+      vote_count_gte: Int
+      vote_count_lte: Int
+      with_cast: String
+      with_companies: String
+      with_crew: String
+      with_genres: String
+      with_keywords: String
+      with_original_language: String
+      with_people: String
+      with_release_type: Int
+      with_runtime_gte: Int
+      with_runtime_lte: Int
+      without_genres: String
+      without_keywords: String
+      year: Int
     ): [Movie]
 
-    getSimilarMovies(
-      id: ID!
-      page: Int
-    ): [Movie]
+    similarMovies(id: ID!, page: Int): [Movie]
 
-    recommendMovies(
-      id: ID!
-      page: Int
-    ): [Movie]
+    recommendMovies(id: ID!, page: Int): [Movie]
+
+    nowPlayingMovies(page: Int): [Movie]
 
     movie(id: ID!): Movie
-    
   }
 
   type Movie {
