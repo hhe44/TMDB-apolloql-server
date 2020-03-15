@@ -38,26 +38,30 @@ class MovieAPI extends RESTDataSource {
 
   async discoverMovies(args) {
     const link = queryString.stringifyUrl({
-      url: `${baseURL}/discover/movie?api_key=${process.env.API_KEY}&`,
-      query: args
+      url: `${baseURL}/discover/movie?api_key=${process.env.API_KEY}&`,query: args
     });
-    const res = await axios.get(link);
-    const movieResults = res.data.results;
-    const movieList = movieResults.map(movie => this.movieReducer(movie));
-    return movieList;
+    return (await axios.get(link)).data.results.map(movie => this.movieReducer(movie));
+  }
+
+  async getSimilarMovies(args) {
+    const link = queryString.stringifyUrl({
+      url: `${baseURL}/movie/${args.id}/similar?api_key=${process.env.API_KEY}&`,query: args
+    });
+    return (await axios.get(link)).data.results.map(movie => this.movieReducer(movie));
+  }
+
+  async recommendMovies(args) {
+    const link = queryString.stringifyUrl({
+      url: `${baseURL}/movie/${args.id}/recommendations?api_key=${process.env.API_KEY}&`,query: args
+    });
+    return (await axios.get(link)).data.results.map(movie => this.movieReducer(movie));
   }
 
   async getMovieById(args) {
     const link = `${baseURL}/movie/${args.id}?api_key=${process.env.API_KEY}`;
-    const res = await axios.get(link);
-    return this.movieReducer(res.data);
+    return (await axios.get(link)).data;
   }
 
-  async getMovieGenres() {
-    const link = `${baseURL}/genre/movie/list?api_key=${process.env.API_KEY}`;
-    const res = await axios.get(link);
-    return res.data;
-  }
 }
 
 module.exports = MovieAPI;

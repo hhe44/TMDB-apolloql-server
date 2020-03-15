@@ -38,6 +38,16 @@ const typeDefs = gql`
         year: Int
     ): [Movie]
 
+    getSimilarMovies(
+      id: ID!
+      page: Int
+    ): [Movie]
+
+    recommendMovies(
+      id: ID!
+      page: Int
+    ): [Movie]
+
     movie(id: ID!): Movie
     
   }
