@@ -38,10 +38,10 @@ class MovieAPI extends RESTDataSource {
     return movie;
   }
 
-  async discoverMovies(args) {
+  async discoverMovies(discoverMovieParams) {
     const link = queryString.stringifyUrl({
       url: `${baseURL}/discover/movie?api_key=${process.env.API_KEY}&`,
-      query: args
+      query: discoverMovieParams
     });
     return (await axios.get(link)).data.results.map(movie =>
       this.movieReducer(movie)
@@ -64,8 +64,15 @@ class MovieAPI extends RESTDataSource {
     );
   }
 
-  async getMovieById(args) {
-    const link = `${baseURL}/movie/${args.id}?api_key=${process.env.API_KEY}`;
+  async getMovie(endpoint, args) {
+    let url = `${baseURL}/movie/${args.id}`;
+    if(endpoint == null || undefined){
+      url += `/${endpoint}`
+    }
+    const link = queryString.stringifyUrl({
+      url: `${url}?api_key=${process.env.API_KEY}&`,
+      query: args
+    });
     return (await axios.get(link)).data;
   }
 }

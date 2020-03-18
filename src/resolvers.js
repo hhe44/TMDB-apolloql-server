@@ -8,7 +8,7 @@ module.exports = {
             with_cast, with_companies, with_crew, with_genres, with_keywords, with_original_language, with_people, with_release_type, 
             with_runtime_gte, with_runtime_lte, without_genres, without_keywords, year
         }, {dataSources}) => dataSources.movieAPI.discoverMovies({
-            discoverMovieParams
+            ...discoverMovieParams
         }),
 
         similarMovies: (_, {id,page}, { dataSources }) => dataSources.movieAPI.getMovies("similar",{id,page}),
@@ -17,7 +17,11 @@ module.exports = {
 
         nowPlayingMovies: (_, {page}, { dataSources }) => dataSources.movieAPI.getMovies("now_playing",{page}),
 
-        movie: (_, {id}, { dataSources }) => dataSources.movieAPI.getMovieById({id}),
+        upcomingMovies: (_, {page}, { dataSources }) => dataSources.movieAPI.getMovies("now_playing",{page}),
+
+        topratedMovies: (_, {page}, { dataSources }) => dataSources.movieAPI.getMovies("top_rated",{page}),
+
+        movie: (_, {id}, { dataSources }) => dataSources.movieAPI.getMovie("",{id}),
 
     }
 }

@@ -43,7 +43,12 @@ const typeDefs = gql`
 
     nowPlayingMovies(page: Int): [Movie]
 
+    upcomingMovies(page: Int): [Movie]
+
+    topratedMovies(page: Int): [Movie]
+
     movie(id: ID!): Movie
+    
   }
 
   type Movie {
