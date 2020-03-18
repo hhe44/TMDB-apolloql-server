@@ -21,7 +21,17 @@ module.exports = {
 
         topratedMovies: (_, {page}, { dataSources }) => dataSources.movieAPI.getMovies("top_rated",{page}),
 
+        trendingMovies: (_, {time_window, page}, { dataSources }) => dataSources.movieAPI.getTrendingMovies({time_window, page}),
+
         movie: (_, {id}, { dataSources }) => dataSources.movieAPI.getMovie("",{id}),
+
+        movieAlternateTitles: (_, {id}, { dataSources }) => dataSources.movieAPI.getMovie("alternative_titles",{id}),
+
+        movieCredits: (_, {id}, { dataSources }) => dataSources.movieAPI.getMovie("credits",{id}),
+
+        movieImages: (_, {id, include_image_language}, { dataSources }) => dataSources.movieAPI.getMovie("images",{id, include_image_language}),
+
+        movieVideos: (_, {id}, { dataSources }) => dataSources.movieAPI.getMovie("videos",{id}),
 
     }
 }

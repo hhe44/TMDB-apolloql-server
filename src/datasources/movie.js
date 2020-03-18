@@ -38,6 +38,19 @@ class MovieAPI extends RESTDataSource {
     return movie;
   }
 
+  imageReducer(images) {
+    const imageArray = [];
+    images.backdrops.forEach(backdrop => {
+      backdrop.imageType = "backdrop";
+      imageArray.push(backdrop);
+    });
+    images.posters.forEach(poster => {
+      poster.imageType = "poster";
+      imageArray.push(poster);
+    });
+    return imageArray;
+  }
+
   async discoverMovies(discoverMovieParams) {
     const link = queryString.stringifyUrl({
       url: `${baseURL}/discover/movie?api_key=${process.env.API_KEY}&`,
@@ -50,7 +63,7 @@ class MovieAPI extends RESTDataSource {
 
   async getMovies(endpoint, args) {
     let url = `${baseURL}/movie/`;
-    if(args.id == null || undefined){
+    if (args.id == null || undefined) {
       // DO NOTHING
     } else {
       url += `${args.id}/`;
@@ -64,16 +77,36 @@ class MovieAPI extends RESTDataSource {
     );
   }
 
+  async getTrendingMovies(args) {
+    const link = `${baseURL}/trending/movie/${args.time_window}?api_key=${
+      process.env.API_KEY
+    }&page=${args.page || 1}`;
+    return (await axios.get(link)).data.results.map(movie =>
+      this.movieReducer(movie)
+    );
+  }
+
   async getMovie(endpoint, args) {
     let url = `${baseURL}/movie/${args.id}`;
-    if(endpoint == null || undefined){
-      url += `/${endpoint}`
-    }
-    const link = queryString.stringifyUrl({
+    url += endpoint !== "" ? `/${endpoint}` : "";
+    let link = queryString.stringifyUrl({
       url: `${url}?api_key=${process.env.API_KEY}&`,
       query: args
     });
-    return (await axios.get(link)).data;
+    switch (endpoint) {
+      case "":
+        return (await axios.get(link)).data;
+      case "alternative_titles":
+        return (await axios.get(link)).data.titles;
+      case "credits":
+        return (await axios.get(link)).data;
+      case "images":
+        if (args.imageLanguagefilter == null || undefined)
+          link += "&include_image_language";
+        return this.imageReducer((await axios.get(link)).data);
+      case "videos":
+        return (await axios.get(link)).data.results;
+    }
   }
 }
 

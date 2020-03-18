@@ -2,6 +2,7 @@ const { gql } = require("apollo-server");
 
 const typeDefs = gql`
   type Query {
+
     discoverMovies(
       page: Int
       certification: String
@@ -47,8 +48,18 @@ const typeDefs = gql`
 
     topratedMovies(page: Int): [Movie]
 
+    trendingMovies(time_window: String!, page: Int): [Movie]
+
     movie(id: ID!): Movie
     
+    movieAlternateTitles(id: ID!): [AlternateTitle]
+
+    movieCredits(id: ID!): Credits
+
+    movieImages(id: ID!, imageLanguagefilter: String): [Image]
+
+    movieVideos(id: ID!): [Video]
+
   }
 
   type Movie {
@@ -79,6 +90,60 @@ const typeDefs = gql`
     id: ID!
     name: String
   }
+  
+  type AlternateTitle {
+    iso_3166_1: String
+    title: String
+  }
+
+  type Credits {
+    cast: [Cast]
+    crew: [Crew]
+  }
+
+  type Cast {
+    cast_id: ID!
+    character: String
+    credit_id: ID!
+    gender: Int
+    id: ID!
+    name: String
+    order: Int
+    profile_path: String
+  }
+
+  type Crew {
+    credit_id: ID!
+    department: String
+    gender: Int
+    id: ID!
+    job: String
+    name: String
+    profile_path: String
+  }
+
+  type Image {
+    imageType: String
+    aspect_ratio: Int
+    file_path: String
+    height: Int
+    iso_639_1: String
+    vote_average: Int
+    vote_count: Int
+    width: Int
+  }
+
+  type Video {
+    id: ID!
+    iso_639_1: String
+    iso_3166_1: String
+    key: String
+    name: String
+    site: String
+    size: Int
+    type: String
+  }
+
 `;
 
 module.exports = typeDefs;
