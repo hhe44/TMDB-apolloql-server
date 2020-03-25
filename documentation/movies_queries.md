@@ -1,3 +1,5 @@
+#Get Multiple Movies
+
 [discoverMovies](https://developers.themoviedb.org/3/discover/movie-discover) | Required Params: **None**
 ```
 {

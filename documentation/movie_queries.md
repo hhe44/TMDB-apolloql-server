@@ -1,3 +1,5 @@
+#Retrieve Specifics of a Movie
+
 [movie](https://developers.themoviedb.org/3/movies/get-movie-details) | Required Params: **id**
 *Get back more specific details of a movie such as imdb_id, revenue, etc*
 ```
