@@ -26,14 +26,14 @@ const typeDefs = gql`
       with_cast: String
       with_companies: String
       with_crew: String
-      with_genres: String
+      with_genres: Int
       with_keywords: String
       with_original_language: String
       with_people: String
       with_release_type: Int
       with_runtime_gte: Int
       with_runtime_lte: Int
-      without_genres: String
+      without_genres: Int
       without_keywords: String
       year: Int
     ): [Movie]
