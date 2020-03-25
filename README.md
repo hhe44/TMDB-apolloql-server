@@ -13,8 +13,8 @@ ApolloQL Server for theMovieDB API, will be working in conjunction with [movie-a
  Ideas and future todo's are found  [here](https://www.notion.so/daec20e458c34ea48ae585458e82b02d?v=c708b62ea18d4d94ac5f67b52dfa76a7)
   
 ### Queries
-* [Movie](documentation\movie_queries.md)
-* [Movies](documentation\movies_queries.md)
+* [Movie](documentation/movie_queries.md)
+* [Movies](documentation/movies_queries.md)
 
 ### Special thanks to...
 Cristian Florea - find his github on https://github.com/yoloonthebattlefield
