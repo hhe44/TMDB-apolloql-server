@@ -8,9 +8,6 @@ ApolloQL Server for theMovieDB API, will be working in conjunction with [movie-a
 4) Check that line 2 is uncommented and line 4 is commented
 4) Run `node index.js` (or use nodemon)
 5) Go to server and tinker!
-
-### Planning Board
- Ideas and future todo's are found  [here](https://www.notion.so/daec20e458c34ea48ae585458e82b02d?v=c708b62ea18d4d94ac5f67b52dfa76a7)
   
 ### Sample Queries & Documentation
 * [Retrieve Specifics of a Movie](documentation/movie_queries.md)
