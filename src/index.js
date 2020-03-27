@@ -5,13 +5,13 @@ require('dotenv').config({path: '../.env'})
 const { ApolloServer } = require("apollo-server");
 const typeDefs = require("./schema");
 const resolvers = require("./resolvers");
-const MovieAPI = require("./datasources/movie");
-const myMovieAPI = new MovieAPI();
+const TheMovieDB = require("./datasources/theMovieDB");
+const theMovieDB = new TheMovieDB();
 
-myMovieAPI.init();
+theMovieDB.init();
 
 const dataSources = () => ({
-  movieAPI: myMovieAPI
+  movieDB: theMovieDB
 });
 
 const server = new ApolloServer({ typeDefs, resolvers, dataSources });

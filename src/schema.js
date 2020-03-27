@@ -60,6 +60,8 @@ const typeDefs = gql`
 
     movieVideos(id: ID!): [Video]
 
+    tvShow(id: ID!): TvShow
+
   }
 
   type Movie {
@@ -142,6 +144,82 @@ const typeDefs = gql`
     site: String
     size: Int
     type: String
+  }
+
+  type TvShow {
+    backdrop_path: String
+    created_by: [Creator]
+    episode_run_time: [Int]
+    first_air_date: String
+    genres: [Genre]
+    homepage: String
+    id: ID!
+    in_production: Boolean
+    languages: [String]
+    last_air_date: String
+    last_episode_to_air: Episode
+    name: String
+    next_episode_to_air: Episode
+    networks: [Network]
+    number_of_episodes: Int
+    number_of_seasons: Int
+    origin_country: [String]
+    original_language: String
+    original_name: String
+    popularity: Float
+    poster_path: String
+    production_companies: [ProductionCompany]
+    seasons: [Season]
+    status: String
+    type: String
+    vote_average: Float
+    vote_count: Int
+  }
+
+  type Creator {
+    id: ID!
+    credit_id: String
+    name: String
+    gender: Int
+    profile_path: String
+  }
+
+  type Episode {
+    air_date: String
+    episode_number: Int
+    id: ID!
+    name: String
+    overview: String
+    production_code: String
+    season_number: Int
+    show_id: ID
+    still_path: String
+    vote_average: Float
+    vote_count: Int
+  }
+
+  type Network {
+    name: String
+    id: ID!
+    logo_path: String
+    origin_country: String
+  }
+
+  type ProductionCompany {
+    id: ID!
+    logo_path: String
+    name: String
+    origin_country: String
+  }
+
+  type Season {
+    air_date: String
+    episode_count: Int
+    id: ID!
+    name: String
+    overview: String
+    poster_path: String
+    season_number: Int
   }
 
 `;

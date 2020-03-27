@@ -3,7 +3,7 @@ const axios = require("axios");
 const baseURL = "https://api.themoviedb.org/3";
 const queryString = require("query-string");
 
-class MovieAPI extends RESTDataSource {
+class TheMovieDB extends RESTDataSource {
   constructor() {
     super();
   }
@@ -108,6 +108,19 @@ class MovieAPI extends RESTDataSource {
         return (await axios.get(link)).data.results;
     }
   }
+
+  async getTvShow(endpoint, args) {
+    let url = `${baseURL}/tv/${args.id}`;
+    url += endpoint !== "" ? `/${endpoint}` : "";
+    let link = queryString.stringifyUrl({
+      url: `${url}?api_key=${process.env.API_KEY}&`,
+      query: args
+    });
+    switch (endpoint) {
+      case "":
+        return (await axios.get(link)).data;
+    }
+  }
 }
 
-module.exports = MovieAPI;
+module.exports = TheMovieDB;
