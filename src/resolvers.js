@@ -11,17 +11,17 @@ module.exports = {
             ...discoverMovieParams
         }),
 
-        similarMovies: (_, {id,page}, { dataSources }) => dataSources.movieDB.getMovies("similar",{id,page}),
+        similarMovies: (_, {id,page}, { dataSources }) => dataSources.movieDB.getMedias("similar","movie",{id,page}),
 
-        recommendMovies: (_, {id,page}, { dataSources }) => dataSources.movieDB.getMovies("recommendations",{id,page}),
+        recommendMovies: (_, {id,page}, { dataSources }) => dataSources.movieDB.getMedias("recommendations","movie",{id,page}),
 
-        nowPlayingMovies: (_, {page}, { dataSources }) => dataSources.movieDB.getMovies("now_playing",{page}),
+        nowPlayingMovies: (_, {page}, { dataSources }) => dataSources.movieDB.getMedias("now_playing","movie",{page}),
 
-        upcomingMovies: (_, {page}, { dataSources }) => dataSources.movieDB.getMovies("now_playing",{page}),
+        upcomingMovies: (_, {page}, { dataSources }) => dataSources.movieDB.getMedias("now_playing","movie",{page}),
 
-        topratedMovies: (_, {page}, { dataSources }) => dataSources.movieDB.getMovies("top_rated",{page}),
+        topratedMovies: (_, {page}, { dataSources }) => dataSources.movieDB.getMedias("top_rated","movie",{page}),
 
-        trendingMovies: (_, {time_window, page}, { dataSources }) => dataSources.movieDB.getTrendingMovies({time_window, page}),
+        trendingMovies: (_, {time_window, page}, { dataSources }) => dataSources.movieDB.getMedias("trending","movie",{time_window, page}),
 
         movie: (_, {id}, { dataSources }) => dataSources.movieDB.getMovie("",{id}),
 

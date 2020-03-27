@@ -61,26 +61,20 @@ class TheMovieDB extends RESTDataSource {
     );
   }
 
-  async getMovies(endpoint, args) {
-    let url = `${baseURL}/movie/`;
-    if (args.id == null || undefined) {
-      // DO NOTHING
+  async getMedias(endpoint, media, args) {
+    const { id, time_window, ...rest } = args;
+    let url = "";
+    if (time_window) {
+      url = `${baseURL}/${endpoint}/${media}/${time_window}`;
+    } else if (!id) {
+      url = `${baseURL}/${media}/${endpoint}`;
     } else {
-      url += `${args.id}/`;
+      url = `${baseURL}/${media}/${id}/${endpoint}`;
     }
     const link = queryString.stringifyUrl({
-      url: `${url}${endpoint}?api_key=${process.env.API_KEY}&`,
-      query: args
+      url: `${url}?api_key=${process.env.API_KEY}&`,
+      query: rest
     });
-    return (await axios.get(link)).data.results.map(movie =>
-      this.movieReducer(movie)
-    );
-  }
-
-  async getTrendingMovies(args) {
-    const link = `${baseURL}/trending/movie/${args.time_window}?api_key=${
-      process.env.API_KEY
-    }&page=${args.page || 1}`;
     return (await axios.get(link)).data.results.map(movie =>
       this.movieReducer(movie)
     );
