@@ -14,13 +14,7 @@ const dataSources = () => ({
   movieDB: theMovieDB
 });
 
-const server = new ApolloServer({context: ({ req }) => {
-  const API_KEY = req.headers.authorization || '';
-  if (!API_KEY) 
-    throw new Error('Enter your API Key into the Authorization Header');
-  else
-    return { API_KEY };
- }, typeDefs, resolvers, dataSources });
+const server = new ApolloServer({ typeDefs, resolvers, dataSources });
 
 server.listen().then(({ url }) => {
   console.log(`🚀  Server ready at ${url}`);
