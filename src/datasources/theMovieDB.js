@@ -9,6 +9,7 @@ class TheMovieDB extends RESTDataSource {
   }
 
   async init() {
+
     // get & set movieGenres
     this.movieGenres = {};
     const movieGenreArray = (
@@ -19,6 +20,18 @@ class TheMovieDB extends RESTDataSource {
     movieGenreArray.forEach(movieGenre => {
       this.movieGenres[movieGenre.id] = movieGenre.name;
     });
+
+    // get & set tvGenres
+    this.tvGenres = {};
+    const tvGenreArray = (
+      await axios.get(
+        `${baseURL}/genre/tv/list?api_key=${process.env.API_KEY}`
+      )
+    ).data.genres;
+    tvGenreArray.forEach(tvGenre => {
+      this.tvGenres[tvGenre.id] = tvGenre.name;
+    });
+
   }
 
   movieReducer(movie) {
@@ -36,6 +49,23 @@ class TheMovieDB extends RESTDataSource {
       });
     }
     return movie;
+  }
+
+  tvShowReducer(show) {
+    if (show.genres != null) {
+      // if movie genres exist, DON'T DO ANYTHING.
+    } else {
+      // otherwise we need to utilize genre ids
+      show.genres = [];
+      show.genre_ids.forEach(genreId => {
+        const genre = {
+          name: this.tvGenres[genreId],
+          id: genreId
+        };
+        show.genres.push(genre);
+      });
+    }
+    return show;
   }
 
   imageReducer(images) {
@@ -75,13 +105,16 @@ class TheMovieDB extends RESTDataSource {
       url: `${url}?api_key=${process.env.API_KEY}&`,
       query: rest
     });
-    return (await axios.get(link)).data.results.map(movie =>
-      this.movieReducer(movie)
-    );
+    const results = (await axios.get(link)).data.results;
+    if (media == "movies") {
+      return results.map(movie => this.movieReducer(movie));
+    } else {
+      return results.map(tvShow => this.tvShowReducer(tvShow));
+    }
   }
 
-  async getMovie(endpoint, args) {
-    let url = `${baseURL}/movie/${args.id}`;
+  async getMedia(endpoint, media, args) {
+    let url = `${baseURL}/${media}/${args.id}`;
     url += endpoint !== "" ? `/${endpoint}` : "";
     let link = queryString.stringifyUrl({
       url: `${url}?api_key=${process.env.API_KEY}&`,

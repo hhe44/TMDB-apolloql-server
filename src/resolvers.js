@@ -12,28 +12,26 @@ module.exports = {
         }),
 
         similarMovies: (_, {id,page}, { dataSources }) => dataSources.movieDB.getMedias("similar","movie",{id,page}),
-
         recommendMovies: (_, {id,page}, { dataSources }) => dataSources.movieDB.getMedias("recommendations","movie",{id,page}),
-
         nowPlayingMovies: (_, {page}, { dataSources }) => dataSources.movieDB.getMedias("now_playing","movie",{page}),
-
         upcomingMovies: (_, {page}, { dataSources }) => dataSources.movieDB.getMedias("now_playing","movie",{page}),
-
         topratedMovies: (_, {page}, { dataSources }) => dataSources.movieDB.getMedias("top_rated","movie",{page}),
-
         trendingMovies: (_, {time_window, page}, { dataSources }) => dataSources.movieDB.getMedias("trending","movie",{time_window, page}),
 
-        movie: (_, {id}, { dataSources }) => dataSources.movieDB.getMovie("",{id}),
+        similarTvShows: (_, {id,page}, { dataSources }) => dataSources.movieDB.getMedias("similar","tv",{id,page}),
+        recommendTvShows: (_, {id,page}, { dataSources }) => dataSources.movieDB.getMedias("recommendations","tv",{id,page}),
+        nowPlayingTvShows: (_, {page}, { dataSources }) => dataSources.movieDB.getMedias("now_playing","tv",{page}),
+        upcomingTvShows: (_, {page}, { dataSources }) => dataSources.movieDB.getMedias("now_playing","tv",{page}),
+        topratedTvShows: (_, {page}, { dataSources }) => dataSources.movieDB.getMedias("top_rated","tv",{page}),
+        trendingTvShows: (_, {time_window, page}, { dataSources }) => dataSources.movieDB.getMedias("trending","tv",{time_window, page}),
 
-        movieAlternateTitles: (_, {id}, { dataSources }) => dataSources.movieDB.getMovie("alternative_titles",{id}),
-
-        movieCredits: (_, {id}, { dataSources }) => dataSources.movieDB.getMovie("credits",{id}),
-
-        movieImages: (_, {id, include_image_language}, { dataSources }) => dataSources.movieDB.getMovie("images",{id, include_image_language}),
-
-        movieVideos: (_, {id}, { dataSources }) => dataSources.movieDB.getMovie("videos",{id}),
-
-        tvShow: (_, {id}, { dataSources }) => dataSources.movieDB.getTvShow("",{id}),
+        movie: (_, {id}, { dataSources }) => dataSources.movieDB.getMedia("","movie",{id}),
+        movieAlternateTitles: (_, {id}, { dataSources }) => dataSources.movieDB.getMedia("alternative_titles","movie",{id}),
+        movieCredits: (_, {id}, { dataSources }) => dataSources.movieDB.getMedia("credits","movie",{id}),
+        movieImages: (_, {id, include_image_language}, { dataSources }) => dataSources.movieDB.getMedia("images","movie",{id, include_image_language}),
+        movieVideos: (_, {id}, { dataSources }) => dataSources.movieDB.getMedia("videos","movie",{id}),
+        
+        tvShow: (_, {id}, { dataSources }) => dataSources.movieDB.getMedia("","tv",{id}),
 
     }
 }
