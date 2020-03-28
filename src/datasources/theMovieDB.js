@@ -124,7 +124,8 @@ class TheMovieDB extends RESTDataSource {
       case "":
         return (await axios.get(link)).data;
       case "alternative_titles":
-        return (await axios.get(link)).data.titles;
+        const response = await axios.get(link);
+        return response.data.titles || response.data.results;
       case "credits":
         return (await axios.get(link)).data;
       case "images":
