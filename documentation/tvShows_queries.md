@@ -20,6 +20,16 @@
 }
 ```
 
+[popularTvShows](https://developers.themoviedb.org/3/tv/get-popular-tv-shows) | Required Params: **None**
+```
+{
+  popularTvShows{
+    name
+		popularity
+  }
+}
+```
+
 [onTheAirTvShows](https://developers.themoviedb.org/3/tv/get-tv-on-the-air) | Required Params: **None**
 ```
 {

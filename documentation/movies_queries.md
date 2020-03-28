@@ -34,6 +34,15 @@
   }
 }
 ```
+[popularMovies](https://developers.themoviedb.org/3/movies/get-popular-movies) | Required Params: **None**
+```
+{
+  popularMovies{
+    title
+		popularity
+  }
+}
+```
 [nowPlayingMovies](https://developers.themoviedb.org/3/movies/get-now-playing) | Required Params: **None**
 ```
 {

@@ -13,6 +13,7 @@ module.exports = {
 
         similarMovies: (_, {id,page}, { dataSources }) => dataSources.movieDB.getMedias("similar","movie",{id,page}),
         recommendMovies: (_, {id,page}, { dataSources }) => dataSources.movieDB.getMedias("recommendations","movie",{id,page}),
+        popularMovies: (_, {page}, { dataSources }) => dataSources.movieDB.getMedias("popular","movie",{page}),
         nowPlayingMovies: (_, {page}, { dataSources }) => dataSources.movieDB.getMedias("now_playing","movie",{page}),
         upcomingMovies: (_, {page}, { dataSources }) => dataSources.movieDB.getMedias("upcoming","movie",{page}),
         topratedMovies: (_, {page}, { dataSources }) => dataSources.movieDB.getMedias("top_rated","movie",{page}),
@@ -20,6 +21,7 @@ module.exports = {
 
         similarTvShows: (_, {id,page}, { dataSources }) => dataSources.movieDB.getMedias("similar","tv",{id,page}),
         recommendTvShows: (_, {id,page}, { dataSources }) => dataSources.movieDB.getMedias("recommendations","tv",{id,page}),
+        popularTvShows: (_, {page}, { dataSources }) => dataSources.movieDB.getMedias("popular","tv",{page}),
         onTheAirTvShows: (_, {page}, { dataSources }) => dataSources.movieDB.getMedias("on_the_air","tv",{page}),
         airingTodayTvShows: (_, {page}, { dataSources }) => dataSources.movieDB.getMedias("airing_today","tv",{page}),
         topratedTvShows: (_, {page}, { dataSources }) => dataSources.movieDB.getMedias("top_rated","tv",{page}),

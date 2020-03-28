@@ -40,6 +40,7 @@ const typeDefs = gql`
 
     similarMovies(id: ID!, page: Int): [Movie]
     recommendMovies(id: ID!, page: Int): [Movie]
+    popularMovies(page: Int): [Movie]
     nowPlayingMovies(page: Int): [Movie]
     upcomingMovies(page: Int): [Movie]
     topratedMovies(page: Int): [Movie]
@@ -47,6 +48,7 @@ const typeDefs = gql`
 
     similarTvShows(id: ID!, page: Int): [TvShow]
     recommendTvShows(id: ID!, page: Int): [TvShow]
+    popularTvShows(page: Int): [TvShow]
     onTheAirTvShows(page: Int): [TvShow]
     airingTodayTvShows(page: Int): [TvShow]
     topratedTvShows(page: Int): [TvShow]
