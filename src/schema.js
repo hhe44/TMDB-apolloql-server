@@ -47,8 +47,8 @@ const typeDefs = gql`
 
     similarTvShows(id: ID!, page: Int): [TvShow]
     recommendTvShows(id: ID!, page: Int): [TvShow]
-    nowPlayingTvShows(page: Int): [TvShow]
-    upcomingTvShows(page: Int): [TvShow]
+    onTheAirTvShows(page: Int): [TvShow]
+    airingTodayTvShows(page: Int): [TvShow]
     topratedTvShows(page: Int): [TvShow]
     trendingTvShows(time_window: String!, page: Int): [TvShow]
 
@@ -57,8 +57,12 @@ const typeDefs = gql`
     movieCredits(id: ID!): Credits
     movieImages(id: ID!, imageLanguagefilter: String): [Image]
     movieVideos(id: ID!): [Video]
-    
+
     tvShow(id: ID!): TvShow
+    tvShowAlternateTitles(id: ID!): [AlternateTitle]
+    tvShowCredits(id: ID!): Credits
+    tvShowImages(id: ID!, imageLanguagefilter: String): [Image]
+    tvShowVideos(id: ID!): [Video]
 
   }
 
