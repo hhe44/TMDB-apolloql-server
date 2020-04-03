@@ -26,16 +26,26 @@ const typeDefs = gql`
       with_cast: String
       with_companies: String
       with_crew: String
-      with_genres: Int
+      with_genres: String
       with_keywords: String
       with_original_language: String
       with_people: String
       with_release_type: Int
       with_runtime_gte: Int
       with_runtime_lte: Int
-      without_genres: Int
+      without_genres: String
       without_keywords: String
       year: Int
+    ): [Movie]
+
+    searchMovies(
+      language: String
+      query: String
+      page: Int
+      include_adult: Boolean
+      region: String
+      year: Int
+      primary_release_year: Int
     ): [Movie]
 
     similarMovies(id: ID!, page: Int): [Movie]
@@ -46,6 +56,39 @@ const typeDefs = gql`
     topratedMovies(page: Int): [Movie]
     trendingMovies(time_window: String!, page: Int): [Movie]
 
+    discoverTvShows(
+      language: String
+      sort_by: String
+      air_date_gte: String
+      air_date_lte: String
+      first_air_date_gte: String
+      first_air_date_lte: String
+      first_air_date_year: Int
+      page: Int
+      timezone: String
+      vote_average_gte: String
+      vote_count_gte: String
+      with_genres: String
+      with_networks: String
+      without_genres: String
+      with_runtime_gte: String
+      with_runtime_lte: String
+      include_null_first_air_dates: Boolean
+      with_origina_language: String
+      without_keywords: String
+      screened_theatrically: Boolean
+      with_companies: String
+      with_keywords: String
+    ): [TvShow]
+
+    searchTvShows(
+      language: String
+      page: Int
+      query: String
+      include_adult: Boolean
+      first_air_date_year: Int
+    ): [TvShow]
+    
     similarTvShows(id: ID!, page: Int): [TvShow]
     recommendTvShows(id: ID!, page: Int): [TvShow]
     popularTvShows(page: Int): [TvShow]

@@ -81,21 +81,13 @@ class TheMovieDB extends RESTDataSource {
     return imageArray;
   }
 
-  async discoverMovies(discoverMovieParams) {
-    const link = queryString.stringifyUrl({
-      url: `${baseURL}/discover/movie?api_key=${this.API_KEY}&`,
-      query: discoverMovieParams
-    });
-    return (await axios.get(link)).data.results.map(movie =>
-      this.movieReducer(movie)
-    );
-  }
-
   async getMedias(endpoint, media, args) {
     const { id, time_window, ...rest } = args;
     let url = "";
     if (time_window) {
       url = `${baseURL}/${endpoint}/${media}/${time_window}`;
+    } else if(endpoint == "discover" || "search"){
+      url = `${baseURL}/${endpoint}/${media}`;
     } else if (!id) {
       url = `${baseURL}/${media}/${endpoint}`;
     } else {
@@ -106,7 +98,7 @@ class TheMovieDB extends RESTDataSource {
       query: rest
     });
     const results = (await axios.get(link)).data.results;
-    if (media == "movies") {
+    if (media == "movie") {
       return results.map(movie => this.movieReducer(movie));
     } else {
       return results.map(tvShow => this.tvShowReducer(tvShow));

@@ -33,7 +33,7 @@ const server = new ApolloServer({
 });
 
 server
-  .listen({ port: 8080 })
+  .listen({ port: 4000 })
   .then(({ url }) => {
   console.log(`\n🚀 Server ready at ${url}`);
 });
