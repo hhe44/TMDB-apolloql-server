@@ -8,13 +8,13 @@ class TheMovieDB extends RESTDataSource {
     super();
   }
 
-  async init() {
-
+  async init(API_KEY) {
+    this.API_KEY = API_KEY;
     // get & set movieGenres
     this.movieGenres = {};
     const movieGenreArray = (
       await axios.get(
-        `${baseURL}/genre/movie/list?api_key=${process.env.API_KEY}`
+        `${baseURL}/genre/movie/list?api_key=${this.API_KEY}`
       )
     ).data.genres;
     movieGenreArray.forEach(movieGenre => {
@@ -25,7 +25,7 @@ class TheMovieDB extends RESTDataSource {
     this.tvGenres = {};
     const tvGenreArray = (
       await axios.get(
-        `${baseURL}/genre/tv/list?api_key=${process.env.API_KEY}`
+        `${baseURL}/genre/tv/list?api_key=${this.API_KEY}`
       )
     ).data.genres;
     tvGenreArray.forEach(tvGenre => {
@@ -83,7 +83,7 @@ class TheMovieDB extends RESTDataSource {
 
   async discoverMovies(discoverMovieParams) {
     const link = queryString.stringifyUrl({
-      url: `${baseURL}/discover/movie?api_key=${process.env.API_KEY}&`,
+      url: `${baseURL}/discover/movie?api_key=${this.API_KEY}&`,
       query: discoverMovieParams
     });
     return (await axios.get(link)).data.results.map(movie =>
@@ -102,7 +102,7 @@ class TheMovieDB extends RESTDataSource {
       url = `${baseURL}/${media}/${id}/${endpoint}`;
     }
     const link = queryString.stringifyUrl({
-      url: `${url}?api_key=${process.env.API_KEY}&`,
+      url: `${url}?api_key=${this.API_KEY}&`,
       query: rest
     });
     const results = (await axios.get(link)).data.results;
@@ -117,7 +117,7 @@ class TheMovieDB extends RESTDataSource {
     let url = `${baseURL}/${media}/${args.id}`;
     url += endpoint !== "" ? `/${endpoint}` : "";
     let link = queryString.stringifyUrl({
-      url: `${url}?api_key=${process.env.API_KEY}&`,
+      url: `${url}?api_key=${this.API_KEY}&`,
       query: args
     });
     switch (endpoint) {
@@ -141,7 +141,7 @@ class TheMovieDB extends RESTDataSource {
     let url = `${baseURL}/tv/${args.id}`;
     url += endpoint !== "" ? `/${endpoint}` : "";
     let link = queryString.stringifyUrl({
-      url: `${url}?api_key=${process.env.API_KEY}&`,
+      url: `${url}?api_key=${this.API_KEY}&`,
       query: args
     });
     switch (endpoint) {
