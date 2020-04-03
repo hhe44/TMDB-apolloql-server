@@ -10,6 +10,7 @@
   }
 }
 ```
+
 [movieAlternateTitles](https://developers.themoviedb.org/3/movies/get-movie-alternative-titles) | Required Params: **id**
 ```
 {
@@ -19,6 +20,7 @@
   }
 }
 ```
+
 [movieCredits](https://developers.themoviedb.org/3/movies/get-movie-alternative-titles) | Required Params: **id**
 ```
 {
@@ -28,6 +30,7 @@
   }
 }
 ```
+
 [movieImages](https://developers.themoviedb.org/3/movies/get-movie-images) | Required Params: **id**
 ```
 {
@@ -37,6 +40,7 @@
   }
 }
 ```
+
 [movieVideos](https://developers.themoviedb.org/3/movies/get-movie-videos) | Required Params: **id**
 ```
 {

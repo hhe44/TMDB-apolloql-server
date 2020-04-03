@@ -13,6 +13,19 @@
   }
 }
 ```
+
+[searchMovies](https://developers.themoviedb.org/3/search/search-movies) | Required Params: **query**
+```
+{
+  searchMovies(
+    query: "Joker"
+  ){
+    title
+    release_date
+  }
+}
+```
+
 [similarMovies](https://developers.themoviedb.org/3/movies/get-similar-movies) | Required Params: **id**
 ```
 {
@@ -25,6 +38,7 @@
   }
 }
 ```
+
 [recommendMovies](https://developers.themoviedb.org/3/movies/get-movie-recommendations) | Required Params: **id**
 ```
 {
@@ -34,6 +48,7 @@
   }
 }
 ```
+
 [popularMovies](https://developers.themoviedb.org/3/movies/get-popular-movies) | Required Params: **None**
 ```
 {
@@ -43,6 +58,7 @@
   }
 }
 ```
+
 [nowPlayingMovies](https://developers.themoviedb.org/3/movies/get-now-playing) | Required Params: **None**
 ```
 {
@@ -52,6 +68,7 @@
   }
 }
 ```
+
 [upcomingMovies](https://developers.themoviedb.org/3/movies/get-upcoming) | Required Params: **None**
 ```
 {
@@ -61,6 +78,7 @@
   }
 }
 ```
+
 [topratedMovies](https://developers.themoviedb.org/3/movies/get-top-rated-movies) | Required Params: **None**
 ```
 {
@@ -70,6 +88,7 @@
   }
 }
 ```
+
 [trendingMovies](https://developers.themoviedb.org/3/trending/get-trending) | Required Params: **time_window**
 *There are only two options for time_window - day or week*
 ```

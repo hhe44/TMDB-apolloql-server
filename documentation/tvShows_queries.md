@@ -1,5 +1,31 @@
 # Retrieve Multiple TV Shows
 
+[discoverTvShows](https://developers.themoviedb.org/3/discover/tv-discover) | Required Params: **None**
+```
+{
+  discoverTvShows(
+    page: 3
+    with_genres: "10759"
+    without_genres: "14"
+  ){
+    name
+    origin_country
+  }
+}
+```
+
+[searchTvShows](https://developers.themoviedb.org/3/search/search-tv-shows) | Required Params: **query**
+```
+{
+  searchTvShows(
+    query: "Harley"
+  ){
+    name
+    first_air_date
+  }
+}
+```
+
 [similarTvShows](https://developers.themoviedb.org/3/tv/get-similar-tv-shows) | Required Params: **id**
 ```
 {
