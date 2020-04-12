@@ -109,6 +109,8 @@ const typeDefs = gql`
     tvShowImages(id: ID!, imageLanguagefilter: String): [Image]
     tvShowVideos(id: ID!): [Video]
 
+    person(id: ID!): Person
+
   }
 
   type Movie {
@@ -267,6 +269,20 @@ const typeDefs = gql`
     overview: String
     poster_path: String
     season_number: Int
+  }
+
+  type Person {
+    birthday: String
+    known_for_department: String
+    deathday: String
+    name: String
+    also_known_as: String
+    gender: Int
+    biography: String
+    popularity: Float
+    profile_path: String
+    imdb_id: String
+    homepage: String
   }
 
 `;

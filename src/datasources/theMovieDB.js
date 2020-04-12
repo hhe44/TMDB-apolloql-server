@@ -106,11 +106,12 @@ class TheMovieDB extends RESTDataSource {
   }
 
   async getMedia(endpoint, media, args) {
-    let url = `${baseURL}/${media}/${args.id}`;
-    url += endpoint !== "" ? `/${endpoint}` : "";
+    const { id, ...rest } = args;
+    let url = `${baseURL}/${media}/${id}`;
+    url += (endpoint !== "") ? `/${endpoint}` : "";
     let link = queryString.stringifyUrl({
       url: `${url}?api_key=${this.API_KEY}&`,
-      query: args
+      query: rest
     });
     switch (endpoint) {
       case "":
@@ -128,19 +129,7 @@ class TheMovieDB extends RESTDataSource {
         return (await axios.get(link)).data.results;
     }
   }
-
-  async getTvShow(endpoint, args) {
-    let url = `${baseURL}/tv/${args.id}`;
-    url += endpoint !== "" ? `/${endpoint}` : "";
-    let link = queryString.stringifyUrl({
-      url: `${url}?api_key=${this.API_KEY}&`,
-      query: args
-    });
-    switch (endpoint) {
-      case "":
-        return (await axios.get(link)).data;
-    }
-  }
+  
 }
 
 module.exports = TheMovieDB;

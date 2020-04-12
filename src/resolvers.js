@@ -47,5 +47,7 @@ module.exports = {
         tvShowImages: (_, {id, include_image_language}, { dataSources }) => dataSources.movieDB.getMedia("images","tv",{id, include_image_language}),
         tvShowVideos: (_, {id}, { dataSources }) => dataSources.movieDB.getMedia("videos","tv",{id}),
 
+        person: (_, {id}, { dataSources }) => dataSources.movieDB.getMedia("","person",{id}),
+
     }
 }
