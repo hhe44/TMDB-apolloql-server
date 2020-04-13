@@ -35,6 +35,11 @@ module.exports = {
         topratedTvShows: (_, {page}, { dataSources }) => dataSources.movieDB.getMedias("top_rated","tv",{page}),
         trendingTvShows: (_, {time_window, page}, { dataSources }) => dataSources.movieDB.getMedias("trending","tv",{time_window, page}),
 
+        searchPeople: (_, searchPeopleParams = {
+            language, page, query, include_adult, region
+        }, { dataSources }) => dataSources.movieDB.getMedias("search","person",{...searchPeopleParams}),
+        popularPeople: (_, {page}, { dataSources }) => dataSources.movieDB.getMedias("popular","person",{page}),
+
         movie: (_, {id}, { dataSources }) => dataSources.movieDB.getMedia("","movie",{id}),
         movieAlternateTitles: (_, {id}, { dataSources }) => dataSources.movieDB.getMedia("alternative_titles","movie",{id}),
         movieCredits: (_, {id}, { dataSources }) => dataSources.movieDB.getMedia("credits","movie",{id}),
@@ -48,6 +53,9 @@ module.exports = {
         tvShowVideos: (_, {id}, { dataSources }) => dataSources.movieDB.getMedia("videos","tv",{id}),
 
         person: (_, {id}, { dataSources }) => dataSources.movieDB.getMedia("","person",{id}),
+        personAllCredits: (_, {id}, { dataSources }) => dataSources.movieDB.getMedia("combined_credits","person",{id}),
+        personImages: (_, {id}, { dataSources }) => dataSources.movieDB.getMedia("images","person",{id}),
+        personTaggedImages: (_, {id}, { dataSources }) => dataSources.movieDB.getMedia("tagged_images","person",{id}),
 
     }
 }

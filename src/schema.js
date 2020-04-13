@@ -19,8 +19,8 @@ const typeDefs = gql`
       release_date_gte: String
       release_date_lte: String
       sort_by: String
-      vote_average_gte: Int
-      vote_average_lte: Int
+      vote_average_gte: Float
+      vote_average_lte: Float
       vote_count_gte: Int
       vote_count_lte: Int
       with_cast: String
@@ -40,7 +40,7 @@ const typeDefs = gql`
 
     searchMovies(
       language: String
-      query: String
+      query: String!
       page: Int
       include_adult: Boolean
       region: String
@@ -66,7 +66,7 @@ const typeDefs = gql`
       first_air_date_year: Int
       page: Int
       timezone: String
-      vote_average_gte: String
+      vote_average_gte: Float
       vote_count_gte: String
       with_genres: String
       with_networks: String
@@ -84,7 +84,7 @@ const typeDefs = gql`
     searchTvShows(
       language: String
       page: Int
-      query: String
+      query: String!
       include_adult: Boolean
       first_air_date_year: Int
     ): [TvShow]
@@ -109,7 +109,19 @@ const typeDefs = gql`
     tvShowImages(id: ID!, imageLanguagefilter: String): [Image]
     tvShowVideos(id: ID!): [Video]
 
+    searchPeople(
+      language: String
+      query: String!
+      page: Int
+      include_adult: Boolean
+      region: String
+    ): [Person]
+    popularPeople(page: Int): [Person]
+
     person(id: ID!): Person
+    personAllCredits(id: ID!): [PersonCredit]
+    personImages(id: ID!): [Image]
+    personTaggedImages(id: ID!): [TaggedImage]
 
   }
 
@@ -175,11 +187,11 @@ const typeDefs = gql`
 
   type Image {
     imageType: String
-    aspect_ratio: Int
+    aspect_ratio: Float
     file_path: String
     height: Int
     iso_639_1: String
-    vote_average: Int
+    vote_average: Float
     vote_count: Int
     width: Int
   }
@@ -281,8 +293,65 @@ const typeDefs = gql`
     biography: String
     popularity: Float
     profile_path: String
+    id: ID!
     imdb_id: String
     homepage: String
+  }
+
+  type PersonCredit {
+    adult: Boolean
+    backdrop_path: String
+    character: String
+    credit_id: ID
+    department: String
+    episode_count: Int
+    first_air_date: String
+    genres: [Genre]
+    id: ID!
+    job: String
+    name: String
+    media_type: String
+    origin_country: [String]
+    original_language: String
+    original_name: String
+    original_title: String
+    overview: String
+    popularity: Float
+    poster_path: String
+    release_date: String
+    title: String
+    video: Boolean
+    vote_average: Float
+    vote_count: Int
+  }
+
+  type TaggedImage {
+    media_type: String
+    media: Media
+    aspect_ratio: Float
+    file_path: String
+    height: Int
+    iso_639_1: String
+    vote_average: Float
+    vote_count: Int
+    width: Int
+  }
+
+  type Media {
+    popularity: Float
+    vote_count: Int
+    video: Boolean
+    poster_path: String
+    id: ID!
+    adult: Boolean
+    backdrop_path: String
+    original_language: String
+    original_title: String
+    genres: [Genre]
+    title: String
+    vote_average: Float
+    overview: String
+    release_date: String
   }
 
 `;
