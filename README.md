@@ -1,6 +1,9 @@
 ### Description:
 ApolloQL Server for theMovieDB API, will be working in conjunction with [movie-app](https://github.com/henryhe44/movie-app)
 
+Explanation Video Here:
+https://www.loom.com/share/5560828705c041c2b65bcaa2a7ed07b3
+
 ### Run the app yourself
 1) Get a MovieDB API key @ https://developers.themoviedb.org/
 2) Clone git repo
