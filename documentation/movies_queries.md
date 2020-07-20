@@ -54,7 +54,7 @@
 {
   popularMovies{
     title
-		popularity
+    popularity
   }
 }
 ```
